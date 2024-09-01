@@ -16,4 +16,7 @@ go.work
 go.work.sum
 
 # env file
-golang-alerthandler/.env
+.env
+
+# others
+.idea

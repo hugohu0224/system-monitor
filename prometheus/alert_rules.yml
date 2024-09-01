@@ -2,8 +2,8 @@ groups:
   - name: example
     rules:
       - alert: HighCPULoad
-        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 70
-        for: 1m
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[30s])) * 100) > 70
+        for: 30s
         labels:
           severity: warning
         annotations:
@@ -12,7 +12,7 @@ groups:
 
       - alert: HighMemoryUsage
         expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 70
-        for: 1m
+        for: 30s
         labels:
           severity: warning
         annotations:

@@ -7,4 +7,4 @@ route:
 receivers:
   - name: 'webhook'
     webhook_configs:
-      - url: 'http://golang-alert-handler:8080/alert'
+      - url: 'http://golang-alerthandler:8080/alert'

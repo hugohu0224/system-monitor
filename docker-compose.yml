@@ -35,13 +35,20 @@ services:
     image: grafana/grafana:latest
     container_name: grafana
     restart: unless-stopped
-    volumes:
-      - grafana_data:/var/lib/grafana
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SNAPSHOTS_EXTERNAL_ENABLED=true
+      - GF_SNAPSHOTS_EXTERNAL_SNAPSHOT_URL=${GRAFANA_SNAPSHOT_URL}
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+    env_file:
+      - .env
     ports:
       - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
 
   alertmanager:
     image: prom/alertmanager:latest
@@ -60,10 +67,8 @@ services:
       - "8080:8080"
     restart: always
     env_file:
-      - ./golang-alerthandler/.env
-    volumes:
-      - ./golang-alerthandler:/app
-    working_dir: /root
+      - ./.env
+    working_dir: /app
 
 volumes:
   prometheus_data:

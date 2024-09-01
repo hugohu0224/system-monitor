@@ -6,7 +6,7 @@ RUN go build -o alert-handler .
 
 # Final stage
 FROM alpine:latest
-WORKDIR /root/
+WORKDIR /app
 COPY --from=builder /app/alert-handler .
 EXPOSE 8080
 CMD ["./alert-handler"]
