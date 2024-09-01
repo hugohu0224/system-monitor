@@ -56,6 +56,13 @@ docker-compose up -d
 #### 1. API Key (Token)
 ![token](/photos/apikey.png)
 #### 2. Dashboard
+1. Use stress-ng to simulate high loading of the CPU and memory
+    ```
+    sudo apt update
+    sudo apt install stress-ng
+    stress-ng --cpu 2 --vm 2 --vm-bytes 2G --timeout 2m
+    ```
+2. Observing from the dashboard
 ![token](/photos/dashboard.png)
 
 ### Alert rules
@@ -64,7 +71,7 @@ and we also need *prometheus/alertmanager.yml* to define where the alerts will b
 ![alertmanager](/photos/alertmanager.png)
 
 ### Alert sent to Gmail
-* #### title
+* #### email
 ![email](/photos/email.png)
 * #### content
 ![emailcontent](/photos/emailcontent.png)
